@@ -6,22 +6,16 @@ function [J, grad] = costFunctionReg(theta, X, y, lambda)
 
 % Initialize some useful values
 m = length(y); % number of training examples
+n = length(theta); % number of features + 1
 
-% You need to return the following variables correctly 
-J = 0;
-grad = zeros(size(theta));
+% Compute without regularization
+[J, grad] = costFunction(theta, X, y);
 
-% ====================== YOUR CODE HERE ======================
-% Instructions: Compute the cost of a particular choice of theta.
-%               You should set J to the cost.
-%               Compute the partial derivatives and set grad to the partial
-%               derivatives of the cost w.r.t. each parameter in theta
+% Regularized cost 
+theta_sliced = theta(2:n); % theta for regularization computing, excluded first row
+J = J + lambda/(2*m) * (theta_sliced' * theta_sliced);% J + coef * sum of squared theta elements (1 x 1)
 
-
-
-
-
-
-% =============================================================
+% Regularized gradient
+grad = grad + [0; lambda/m * theta_sliced] 
 
 end
