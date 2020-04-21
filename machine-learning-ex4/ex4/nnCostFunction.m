@@ -85,8 +85,8 @@ h = A3; % hypothesis
 J = (-1/m) * sum(sum(Y .* log(h) + (1-Y) .* log(1-h)));
 
 % Calculate regulazation
-J_regulazation = (lambda / (2 * m)) * (sum(sum(Theta1(2:end) .^ 2)) + ...
-									   sum(sum(Theta2(2:end) .^ 2)));
+J_regulazation = (lambda / (2 * m)) * (sum(sum(Theta1(:,2:end) .^ 2)) + ...
+									   sum(sum(Theta2(:,2:end) .^ 2)));
 									   
 % Add regulazation to J
 J = J + J_regulazation
@@ -113,7 +113,7 @@ for t = 1:m
 end
 
 Theta1_grad = (1/m) * Theta1_grad;
-Theta2_grad = (1/m) * Theta2_grad ;
+Theta2_grad = (1/m) * Theta2_grad;
 
 % Add regularization terms
 Theta1_grad(:,2:end) = Theta1_grad(:,2:end) + (lambda/m) * Theta1(:,2:end);
